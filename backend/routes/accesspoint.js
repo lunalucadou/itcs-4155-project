@@ -24,12 +24,14 @@ router.route('/add').post((req, res)=>{
     const id = req.body.id;
     const latitude = req.body.latitude
     const longitude = req.body.longitude
+    const time = Date.parse(req.body.time)
 
 
     const newPoint = new AccessPoint({
         id,
         latitude,
-        longitude
+        longitude,
+        time
     });
 
 

@@ -15,6 +15,10 @@ const accesspointSchema = new Schema({
     longitude: {
         type: String,
         required: true
+    },
+    time: {
+        type: Date,
+        required: true
     }
 }, {
     timestamp: true,
