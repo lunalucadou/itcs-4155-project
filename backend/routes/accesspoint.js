@@ -14,22 +14,29 @@ router.route('/').get((req, res)=>{
 router.route('/get').get((req, res)=>{
     // .find is a mongoose method that returns items from the mongoose database and returns a promise
     AccessPoint.find()
+    // This is called a promise
         .then(accesspoint => res.json(accesspoint))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err))
 });
 
 // This is the POST request
 router.route('/add').post((req, res)=>{
-    const point = req.body.point;
-    const building = req.body.buiding
+    const id = req.body.id;
+    const latitude = req.body.latitude
+    const longitude = req.body.longitude
 
-    const newPoint = new AccessPoint({point, building})
+
+    const newPoint = new AccessPoint({
+        id,
+        latitude,
+        longitude
+    });
 
 
     // .save
     newPoint.save()
         .then(()=> res.json('Point added!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .catch(err => res.status(400).json('Error: ' + err))
 });
 
 

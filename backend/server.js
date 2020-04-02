@@ -28,7 +28,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
 );
 const connection = mongoose.connection;
 connection.once('open', ()=>{
-    console.log("Mongoose database connection established succesfully!")
+    console.log("Mongoose database connection established succesfully!");
 });
 
 
@@ -37,13 +37,15 @@ connection.once('open', ()=>{
 
 //Set up the routes
 ///*
-app.use(require('./routes'))
+// app.use(require('./routes'))
 //*/
 // const mainRouter = require('./routes/index')
 // app.use('/', mainRouter);
 //
-// const accesspointRouter = require('./routes/accesspoint');
-// app.use('/accesspoint', accesspointRouter);
+const homeRouter = require('./routes/home');
+app.use('/', homeRouter);
+const accesspointRouter = require('./routes/accesspoint');
+app.use('/accesspoint', accesspointRouter);
 
 
 

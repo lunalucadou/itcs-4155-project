@@ -3,25 +3,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Specific code for this schema
-const testSchema = new Schema({
-    point: {
+const accesspointSchema = new Schema({
+    id: {
         type: String,
-        required: true,
-        unique: true,
-        trim: true, // Will trim off the whitespaces
-        minlength: 2
+        required: true
     },
-    building: {
+    latitude: {
         type: String,
-        required: false,
-        unique: false,
-        trim: true, // Will trim off the whitespaces
-        minlength: 2
+        required: true
+    },
+    longitude: {
+        type: String,
+        required: true
     }
 }, {
     timestamp: true,
 })
 
-const AccessPoint = mongoose.model('AccessPoint', testSchema);
+const AccessPoint = mongoose.model('AccessPoint', accesspointSchema);
 
 module.exports = AccessPoint;
