@@ -16,7 +16,7 @@ export default class AccessPoints extends Component {
     render() {
         return (
             <div>
-                <p>Insert HTML here!</p>
+                <p>Insert HTML and JavaScript here!</p>
             </div>
         )
     }
