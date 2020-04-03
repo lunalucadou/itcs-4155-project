@@ -36,14 +36,6 @@ connection.once('open', ()=>{
 
 
 //Set up the routes
-///*
-// app.use(require('./routes'))
-//*/
-// const mainRouter = require('./routes/index')
-// app.use('/', mainRouter);
-//
-const homeRouter = require('./routes/home');
-app.use('/', homeRouter);
 const accesspointRouter = require('./routes/accesspoint');
 app.use('/accesspoint', accesspointRouter);
 

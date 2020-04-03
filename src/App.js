@@ -8,6 +8,9 @@ function App() {
   return (
     <Router>
     <Route path="/" exact component={AccessPoints} />
+    <Route path="/accesspoint" component={AccessPoints} />
+    <Route path="/accesspoint/get" component={AccessPoints} />
+    <Route path="/accesspoint/add" component={AccessPoints} />
     </Router>
   );
 }
