@@ -5,9 +5,16 @@ import { Link } from 'react-router-dom'
 
 // Same with different names across all components
 export default class AccessPoints extends Component {
+
+
+    // Up here is where you will get the information from mongoose to use in the component
+
+
     render() {
         return (
-            <div> Testing </div>
+            <div>
+                <p>Insert HTML here!</p>
+            </div>
         )
     }
 }

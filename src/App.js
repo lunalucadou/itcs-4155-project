@@ -7,7 +7,6 @@ import AccessPoints from "./components/accesspoints.component.js"
 function App() {
   return (
     <Router>
-    <AccessPoints />
     <Route path="/" exact component={AccessPoints} />
     </Router>
   );
