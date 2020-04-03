@@ -34,7 +34,8 @@ export default class AccessPoints extends Component {
                 }
             })
         }
-    }
+
+        
     */
 
 
