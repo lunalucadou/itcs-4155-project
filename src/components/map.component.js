@@ -11,9 +11,11 @@ export default class Map extends Component {
 
 
 
-    // Seen from below, you have to bind the this keyword (fsr)
-    this.onGetPointatDate = this.onGetPointatDate.bind(this)
-
+    // Seen from below, you have to bind the 'this' keywords to all of the methods that use it
+    this.GetAllPoints = this.GetAllPoints.bind(this)
+    this.ShowPointByDate = this.ShowPointByDate.bind(this)
+    this.HidePointByDate = this.HidePointByDate.bind(this)
+    this.PostPoint = this.PostPoint.bind(this)
 
 
 
@@ -22,7 +24,7 @@ export default class Map extends Component {
         // Must call the SUPER when using a sub-class
         super(props)
 
-        // Represents the fields in the JSON model
+        // This represents class properties, which will be used/rendered in the below HTML/JSX
         // Using state is how you will make variables in React instead of saying: var point = "xyx"
         this.state = {
             accesspoint: []
@@ -37,13 +39,17 @@ export default class Map extends Component {
 
         // This is a "life cycle" method, this will automatically be called before the page renders the below HTML
         componentDidMount(){
+            // If we want to test before loading from database
             this.setState({
                 accesspoint: ['test point']
             })
+
+            // If we want to try to load from database
+            GetAllPoints()
         }
 
-        GetPointAtDate(e){
-            axios.get('http://localhost:port#/accesspoint/get')
+        GetAllPoints(e){
+            axios.get('http://localhost:3000/accesspoint/get')
                 .then(response => {
                     if(response.data.length > 0){
                         this.setState({
@@ -56,16 +62,16 @@ export default class Map extends Component {
                 })
         }
 
-        PostPoint(e){
-            axios.post ...
-        }
-
         HidePointByDate(e){
             ...
         }
 
         ShowPointByDate(e){
             ...
+        }
+
+        PostPoint(e){
+            axios.post ...
         }
     */
 
@@ -85,6 +91,7 @@ export default class Map extends Component {
                     //    className="slider-main-slider"
                     //    onSlide = {this.ShowPointByDate}
                     // />
+
                 </body>
             </html>
         )
