@@ -1,6 +1,6 @@
 // Same across all components
 import React, { Component } from 'react';
-// If there are routes
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 // Same with different names across all components
@@ -33,12 +33,17 @@ export default class AccessPoints extends Component {
         // This is where you will add methods to update properties of the state
         // Irrelavent example
         onGetPointatDate(e){
-            // See above for 'this'
-            this.setState({
-                if(time > x){
-                    render...
-                }
-            })
+            axios.get('http://localhost:port#/accesspoint/get')
+                .then(response => {
+                    if(response.data.length > 0){
+                        this.setState({
+                            id: response.data.map(accesspoint => accesspoint.id)
+                            longitude: response.data.map(accesspoint => accesspoint.longitude)
+                            latitude: response.data.map(accesspoint => accesspoint.latitude)
+                            time: response.data.map(accesspoint => accesspoint.time)
+                        })
+                    }
+                })
         }
     */
 
@@ -157,10 +162,11 @@ export default class AccessPoints extends Component {
 
             </body>
 
-            <!-- </body> -->
+            //</body>
 
             </html>
 
+            // <button>
         )
     }
 }
