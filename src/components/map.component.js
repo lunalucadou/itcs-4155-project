@@ -42,7 +42,7 @@ export default class Map extends Component {
             })
         }
 
-        onGetPointatDate(e){
+        GetPointAtDate(e){
             axios.get('http://localhost:port#/accesspoint/get')
                 .then(response => {
                     if(response.data.length > 0){
@@ -56,15 +56,15 @@ export default class Map extends Component {
                 })
         }
 
-        onPostPoint(e){
+        PostPoint(e){
             axios.post ...
         }
 
-        onHidePoint(e){
+        HidePointByDate(e){
             ...
         }
 
-        onShowPoint(e){
+        ShowPointByDate(e){
             ...
         }
     */
@@ -80,6 +80,11 @@ export default class Map extends Component {
                 </header>
                 <body>
                     <div>Map</div>
+
+                    // <slider
+                    //    className="slider-main-slider"
+                    //    onSlide = {this.ShowPointByDate}
+                    // />
                 </body>
             </html>
         )
