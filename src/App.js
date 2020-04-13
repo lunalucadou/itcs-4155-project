@@ -1,7 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
+import "./styles.css"
 import Map from "./components/map.component.js"
+import Nav from "./components/nav.component.js"
+import SideBar from "./components/sidebar.component.js"
+import Footer from "./components/footer.component.js"
+
+
+
 import { GoogleMap, withScriptjs, withGoogleMap} from "react-google-maps"
 import { GoogleMapsOverlay } from '@deck.gl/google-maps';
 import { HexagonLayer } from '@deck.gl/aggregation-layers';
@@ -15,7 +22,7 @@ const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicmphbmlrMSIsImEiOiJjazh3ZXgwcHMwanltM3Rz
 const initialViewState = {
   longitude: -80.7333755493164,
   latitude: 35.306247569901494,
-  zoom: 17,
+  zoom: 16,
   pitch: 0,
   bearing: 0
 };
@@ -81,16 +88,33 @@ class App extends React.Component {
     ];
 
     return (
+      <Router>
+      <div style = {{width: '100vw', height: '100vh'}}>
       <DeckGL
         initialViewState={initialViewState}
         controller={true}
         layers={layers}
       >
-      
+        
+        <Nav />
+        <SideBar />
+        
+        
+
+          
+          
 
         <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
+        
         <div id="tooltip" style={{ height: '100%' }}></div>
+
       </DeckGL>
+      </div>
+        <Footer />
+      
+      
+
+      </Router>
     );
   }
 }
