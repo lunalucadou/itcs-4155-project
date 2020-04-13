@@ -1,0 +1,102 @@
+[
+    {
+     "ap_id":"Woodward Hall South",
+     "n_connected": 50,
+     "latitude": 35.30706183012452,
+     "longitude": -80.73572516441347
+    },
+
+    {
+        "ap_id":"Woodward Hall North",
+        "n_connected": 40,
+        "latitude": 35.30742080245862,
+        "longitude": -80.73518872261049
+       },
+
+       {
+        "ap_id":"Belk North",
+        "n_connected": 15,
+        "latitude": 35.30552085762027,
+        "longitude": -80.73557496070863
+       },
+
+       {
+        "ap_id":"Belk South",
+        "n_connected": 15,
+        "latitude": 35.3051706325032,
+        "longitude": -80.73556423187257
+       },
+
+       {
+        "ap_id":"Halton North",
+        "n_connected": 35,
+        "latitude": 35.30673787811422,
+        "longitude": -80.73439478874208
+       },
+
+       {
+        "ap_id":"Halton South",
+        "n_connected": 25,
+        "latitude": 35.306177525628506,
+        "longitude": -80.73408365249634
+       },
+
+       {
+        "ap_id":"COED",
+        "n_connected": 25,
+        "latitude": 35.30754337801279,
+        "longitude": -80.73409438133241
+       },
+
+       {
+        "ap_id":"CHHS North",
+        "n_connected": 55,
+        "latitude": 35.30764844262566,
+        "longitude": -80.73334336280824
+       },
+
+       {
+        "ap_id":"CHHS South",
+        "n_connected": 55,
+        "latitude": 35.307105607323706,
+        "longitude": -80.73334336280824
+       },
+
+       {
+        "ap_id":"Burson North",
+        "n_connected": 20,
+        "latitude": 35.307534622622214,
+        "longitude": -80.73232412338257
+       },
+
+       {
+        "ap_id":"Burson South",
+        "n_connected": 22,
+        "latitude": 35.30722818335544,
+        "longitude": -80.73228120803834
+       },
+
+       {
+        "ap_id":"Atkins North",
+        "n_connected": 55,
+        "latitude": 35.305967392445766,
+        "longitude": -80.73236703872682
+       },
+
+       {
+        "ap_id":"Atkins South",
+        "n_connected": 60,
+        "latitude": 35.30549459078906,
+        "longitude": -80.73218464851381
+       },
+
+       {
+        "ap_id":"Cone",
+        "n_connected": 35,
+        "latitude": 35.305301967099744,
+        "longitude": -80.73315024375917
+       }
+    
+    
+       
+]

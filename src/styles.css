@@ -1,0 +1,107 @@
+body {
+    /* background-image: url("/assets/img/student_union.jpg"); */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/img/student_union.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+
+}
+
+.contentArea {
+    min-height: 50vh;
+    width: 100vw;
+}
+
+
+#siteLogo {
+    max-height: 55px;
+
+}
+
+.middleNavlink {
+    border-right: 2px solid #fff;
+    margin: 0px 10px 0px 10px;
+    padding: 0px 10px 0px 10px;
+}
+
+.bg-dark {
+    background: linear-gradient(to bottom, rgba(51, 93, 75, 1) 0%, rgba(0, 69, 37, 1) 100%);
+}
+
+footer {
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(51, 93, 75, 1) 0%, rgba(0, 69, 37, 1) 100%);
+    padding: 3%;
+    color: #d5d5d5;
+}
+
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+
+#tooltip {
+    position: absolute;
+    background: #d5d5d5;
+    border-radius: 5%;
+    opacity: 0.9;
+    margin: 10px;
+    padding: 10px;
+    display: none;
+}
+
+#sideBar {
+    position: absolute;
+    background: #d5d5d5;
+    border-radius: 5%;
+    opacity: 0.9;
+    margin: 10px;
+    padding: 10px;
+    min-height: 15vh;
+    min-width: 15vw;
+    right: 10px;
+}
+
+#myRange {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20em;
+    height: 1em;
+    background: #046A38;
+    outline: none;
+    margin-top: 2em;
+    border-radius: 1em;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    background: #BAC5D2;
+}
+
+.date,
+.time {
+    margin-top: 15px;
+}
+
+#toggleHex{
+    margin-right: 5px;;
+}
+
+.mapContainer {
+    background-color: #d5d5d5;
+    padding: 20px;
+    border-radius: 0.25rem;
+
+}
