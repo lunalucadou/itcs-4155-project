@@ -4,26 +4,30 @@ const Schema = mongoose.Schema;
 
 // Specific code for this schema
 const accesspointSchema = new Schema({
-    id: {
+    timestamp: {
+        type: String,
+        required: true
+    },
+    building: {
         type: String,
         required: true
     },
     latitude: {
-        type: String,
+        type: Number,
         required: true
     },
     longitude: {
-        type: String,
+        type: Number,
         required: true
     },
-    time: {
-        type: Date,
+    connections: {
+        type: Number,
         required: true
     }
 }, {
     timestamp: true,
 })
 
-const AccessPoint = mongoose.model('AccessPoint', accesspointSchema);
+const AccessPoints = mongoose.model('AccessPoints', accesspointSchema);
 
-module.exports = AccessPoint;
+module.exports = AccessPoints;

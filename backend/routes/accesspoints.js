@@ -1,6 +1,6 @@
 const router = require('express').Router();
 // This is where you pull in the model
-let AccessPoint = require('../models/accesspoint.model')
+let AccessPoints = require('../models/accesspoints.model')
 
 
 
@@ -13,7 +13,7 @@ router.route('/').get((req, res)=>{
 // This is the GET request
 router.route('/get').get((req, res)=>{
     // .find is a mongoose method that returns items from the mongoose database and returns a promise
-    AccessPoint.find()
+    AccessPoints.find()
     // This is called a promise
         .then(accesspoint => res.json(accesspoint))
         .catch(err => res.status(400).json('Error: ' + err))
@@ -21,17 +21,19 @@ router.route('/get').get((req, res)=>{
 
 // This is the POST request
 router.route('/add').post((req, res)=>{
-    const id = req.body.id;
+    const timestamp = req.body.timestamp;
+    const building = req.body.building;
     const latitude = req.body.latitude
     const longitude = req.body.longitude
-    const time = Date.parse(req.body.time)
+    const connections = req.body.connections
 
 
-    const newPoint = new AccessPoint({
-        id,
+    const newPoint = new AccessPoints({
+        timestamp,
+        building,
         latitude,
         longitude,
-        time
+        connections
     });
 
 
