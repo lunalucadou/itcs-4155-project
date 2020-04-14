@@ -7,7 +7,7 @@ let AccessPoints = require('../models/accesspoints.model')
 // Root route for the accesspoints
 router.route('/').get((req, res)=>{
     // .find is a mongoose method that returns items from the mongoose database and returns a promise
-    res.send("<p>ACCCESS POINTS PLACHOLDER</p>")
+    res.send("<p>ACCESS POINTS PLACHOLDER</p>")
 });
 
 // This is the GET request

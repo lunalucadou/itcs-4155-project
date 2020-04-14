@@ -36,8 +36,8 @@ connection.once('open', ()=>{
 
 
 //Set up the routes
-const accesspointRouter = require('./routes/accesspoint');
-app.use('/accesspoint', accesspointRouter);
+const accesspointRouter = require('./routes/accesspoints');
+app.use('/accesspoints', accesspointRouter);
 
 
 
