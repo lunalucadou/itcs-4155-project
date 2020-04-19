@@ -10,6 +10,8 @@ router.route('/').get((req, res)=>{
     res.send("<p>ACCESS POINTS PLACHOLDER</p>")
 });
 
+
+
 // This is the GET request
 router.route('/get').get((req, res)=>{
     // .find is a mongoose method that returns items from the mongoose database and returns a promise
@@ -18,6 +20,8 @@ router.route('/get').get((req, res)=>{
         .then(accesspoint => res.json(accesspoint))
         .catch(err => res.status(400).json('Error: ' + err))
 });
+
+
 
 // This is the POST request
 router.route('/add').post((req, res)=>{
@@ -43,6 +47,34 @@ router.route('/add').post((req, res)=>{
         .catch(err => res.status(400).json('Error: ' + err))
 });
 
+
+router.route('/addmany').post((req, res)=>{
+
+    // Array of JSON Objects
+    if (req.body.batch){
+        AccessPoints.create(req.body.batch, function(err){
+            if(err)
+            res.send(err);
+
+            else
+            res.json(req.body);
+        });
+    }
+    // Single JSON Object
+    else {
+        var newAcc = new AccessPoints(req.body);
+
+        // New accesspoint is saved in the db.
+        newAcc.save(function(err){
+            if(err)
+                res.send(err);
+
+        // If no errors are found, it responds with a JSON of the new user
+            else
+                res.json(req.body);
+        });
+    }
+});
 
 
 module.exports = router;
