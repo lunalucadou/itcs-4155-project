@@ -21,6 +21,15 @@ router.route('/get').get((req, res)=>{
         .catch(err => res.status(400).json('Error: ' + err))
 });
 
+// This is the GET request for specific timestamps
+router.route('/get/:time').get((req, res)=>{
+    // .find is a mongoose method that returns items from the mongoose database and returns a promise
+    var query = AccessPoints.find({"timestamp" : req.params.time})
+    // This is called a promise
+        .then(query => res.json(query))
+        .catch(err => res.status(400).json('Error: ' + err))
+});
+
 
 
 // This is the POST request
