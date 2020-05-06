@@ -6,8 +6,8 @@ import "./styles.css"
 import Nav from "./components/nav.component.js"
 import SideBar from "./components/sidebar.component.js"
 import Footer from "./components/footer.component.js"
-
-
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 // import { GoogleMap, withScriptjs, withGoogleMap} from "react-google-maps"
 // import { GoogleMapsOverlay } from '@deck.gl/google-maps';
@@ -114,6 +114,11 @@ class App extends React.Component {
         // layers={layers}
         layers={this.state.layers}
       >
+        <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
+        
+        <div id="tooltip" style={{ height: '100%' }}></div>
+
+      </DeckGL>
         
         <Nav />
         <div id="sideBar">
@@ -132,11 +137,19 @@ class App extends React.Component {
            </div>
            
 
-               <div class="slidecontainer">
-                   {/* <!-- TODO: make slider adjust time entry box --> */}
-                   <input type="range" min="1" max="100" value="50" class="slider" id="myRange" />
-
-               </div>
+           <Typography id="discrete-slider" gutterBottom>
+        Time
+      </Typography>
+      <Slider
+        defaultValue={480}
+        // getAriaValueText={valuetext}
+        aria-labelledby="discrete-slider"
+        valueLabelDisplay="auto"
+        step={5}
+        marks
+        min={0}
+        max={960}
+      />
 
                <button type="button" onClick={() => this.toggleHex()} id="toggleHex" class="btn btn-secondary">Toggle Hex Layer</button>
                <button type="button" id="toggleHeat" class="btn btn-secondary">Toggle Heatmap Layer</button>
@@ -147,11 +160,7 @@ class App extends React.Component {
        </div>
     </div>
 
-        <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
         
-        <div id="tooltip" style={{ height: '100%' }}></div>
-
-      </DeckGL>
       </div>
         <Footer />
       
