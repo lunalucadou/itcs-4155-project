@@ -1,10 +1,10 @@
 import React from 'react';
 import { GoogleMap, Marker, withGoogleMap, withScriptjs} from 'react-google-maps';
-import { GoogleMapsOverlay } from '@deck.gl/google-maps';
-import { HexagonLayer } from '@deck.gl/aggregation-layers';
-import { ScatterplotLayer } from '@deck.gl/layers';
-import { HeatmapLayer } from '@deck.gl/aggregation-layers';
-import DeckGL from '@deck.gl/react';
+// import { GoogleMapsOverlay } from '@deck.gl/google-maps';
+// import { HexagonLayer } from '@deck.gl/aggregation-layers';
+// import { ScatterplotLayer } from '@deck.gl/layers';
+// import { HeatmapLayer } from '@deck.gl/aggregation-layers';
+// import DeckGL from '@deck.gl/react';
 import mapStyles from "../mapStyles";
 
 //const demoData = './demodata.json';

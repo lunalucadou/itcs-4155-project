@@ -2,15 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./styles.css"
-import Map from "./components/map.component.js"
+// import Map from "./components/map.component.js"
 import Nav from "./components/nav.component.js"
 import SideBar from "./components/sidebar.component.js"
 import Footer from "./components/footer.component.js"
 
 
 
-import { GoogleMap, withScriptjs, withGoogleMap} from "react-google-maps"
-import { GoogleMapsOverlay } from '@deck.gl/google-maps';
+// import { GoogleMap, withScriptjs, withGoogleMap} from "react-google-maps"
+// import { GoogleMapsOverlay } from '@deck.gl/google-maps';
 import { HexagonLayer } from '@deck.gl/aggregation-layers';
 import { ScatterplotLayer } from '@deck.gl/layers';
 import { HeatmapLayer } from '@deck.gl/aggregation-layers';
@@ -19,7 +19,8 @@ import {StaticMap} from 'react-map-gl';
 const demoData = require('./demodata.json');
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicmphbmlrMSIsImEiOiJjazh3ZXgwcHMwanltM3RzZm1kYTJwbjk1In0.kERuiTj_jF-CSG6lqkGeNQ';
 
-const initialViewState = {
+var layers = [];
+var initialViewState = {
   longitude: -80.7333755493164,
   latitude: 35.306247569901494,
   zoom: 16,
@@ -27,20 +28,16 @@ const initialViewState = {
   bearing: 0
 };
 
-class App extends React.Component {
-  render() {
-    
-    const layers = [
-      new HeatmapLayer({
+const myHeatmapLayer = new HeatmapLayer({
         id: 'heat',
         data: demoData,
         getPosition: d => [d.longitude, d.latitude],
         getWeight: d => d.n_connected * 0.4,
         radiusPixels: 60,
        
-    }),
+    })
 
-    new HexagonLayer({
+const myHexagonLayer = new HexagonLayer({
       id: 'hex',
       data: demoData,
       getPosition: d => [d.longitude, d.latitude],
@@ -50,9 +47,9 @@ class App extends React.Component {
       opacity: 0.6,        
       coverage: 0.88,
       lowerPercentile: 50,
-  }),
+  })
 
-  new ScatterplotLayer({
+const myScatterplotLayer = new ScatterplotLayer({
     id: 'scatter',
     data: demoData,
     opacity: 0.8,
@@ -61,9 +58,6 @@ class App extends React.Component {
     radiusMaxPixels: 20,
     getPosition: d => [d.longitude, d.latitude],
     getFillColor: d => d.n_connected > 0 ? [200, 0, 40, 150] : [255, 140, 0, 100],
-    
-    
-
     pickable: true,
     // onHover: ({object, x, y}) => {
     //     const el = document.getElementById('tooltip');
@@ -82,27 +76,76 @@ class App extends React.Component {
     // onClick: ({object, x, y}) => {
     //   //Do something
     // },
-     
   })
 
-    ];
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.toggleHex = this.toggleHex.bind(this);
+    layers.push(myHeatmapLayer, myHexagonLayer, myScatterplotLayer);
+    this.state = {layers: layers};
+  }
 
+  //function to turn the hex layer on and off
+  toggleHex(){
+    //if the hexagon layer is active
+  if (this.state.layers.includes(myHexagonLayer)){
+  //remove the hex layer from the array
+  this.state.layers.splice(this.state.layers.indexOf(myHexagonLayer),1);
+  }else{ //if the hex layer is not active
+    //add the hex layer to the array of layers
+    this.state.layers.push(myHexagonLayer);
+  }
+    this.setState({layers:layers}, () => {
+      console.log('State updated')
+    });
+    // StaticMap.setLayoutProperty('HeatmapLayer', 'visibility', 'none');
+  }
+
+  render() {
+    
+ 
     return (
       <Router>
       <div style = {{width: '100vw', height: '100vh'}}>
       <DeckGL
         initialViewState={initialViewState}
         controller={true}
-        layers={layers}
+        // layers={layers}
+        layers={this.state.layers}
       >
         
         <Nav />
-        <SideBar />
-        
-        
+        <div id="sideBar">
+       <div class="form">
+           <div class="row">
 
-          
-          
+               <div class="col">
+                   <input type="date" class="date form-control" id="myDate" />
+               </div>
+               <div class="col">
+
+                   <input type="time" class="time form-control" min="00:00:00" max="01:30:00" />
+               </div>
+
+
+           </div>
+           
+
+               <div class="slidecontainer">
+                   {/* <!-- TODO: make slider adjust time entry box --> */}
+                   <input type="range" min="1" max="100" value="50" class="slider" id="myRange" />
+
+               </div>
+
+               <button type="button" onClick={() => this.toggleHex()} id="toggleHex" class="btn btn-secondary">Toggle Hex Layer</button>
+               <button type="button" id="toggleHeat" class="btn btn-secondary">Toggle Heatmap Layer</button>
+               
+           
+
+
+       </div>
+    </div>
 
         <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
         
@@ -116,25 +159,12 @@ class App extends React.Component {
 
       </Router>
     );
+
+    
   }
+  
 }
 
-// function App() {
-//   return (
-//     <Router>
-//       <div style = {{width: '100vw', height: '100vh'}}>
-//         <Map
-//             true
-//             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
-//             loadingElement={<div style={{ height: `100%` }} />}
-//             containerElement={<div style={{ height: `100%` }} />}
-//             mapElement={<div style={{ height: `100%` }} />}
-//         />
-
-
-//       </div>
-//     </Router>
-//   );
-// }
 
 export default App;
+// export {toggleHex};

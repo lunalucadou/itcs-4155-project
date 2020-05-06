@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+var myApp = require('../App.js');
+
 
 class SideBar extends Component {
+    constructor(props){
+        super(props)
+        
+    }
     render() {
        return  <div id="sideBar">
        <div class="form">
@@ -24,8 +30,9 @@ class SideBar extends Component {
 
                </div>
 
-               <button type="button" id="toggleHex" class="btn btn-secondary">Toggle Hex Layer</button>
+               <button type="button" onClick={() => this.props.toggleHex()} id="toggleHex" class="btn btn-secondary">Toggle Hex Layer</button>
                <button type="button" id="toggleHeat" class="btn btn-secondary">Toggle Heatmap Layer</button>
+               
            
 
 
@@ -33,4 +40,5 @@ class SideBar extends Component {
     </div>
     }
   }
+  
   export default SideBar; 
