@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./styles.css"
@@ -20,6 +21,10 @@ const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicmphbmlrMSIsImEiOiJjazh3ZXgwcHMwanltM3Rz
 
 
 var layers = [];
+var showHex = true;
+var showHeat = true;
+var showScatter = true;
+
 var initialViewState = {
   longitude: -80.7333755493164,
   latitude: 35.306247569901494,
@@ -34,7 +39,12 @@ const myHeatmapLayer = new HeatmapLayer({
         getPosition: d => [d.longitude, d.latitude],
         getWeight: d => d.n_connected * 0.4,
         radiusPixels: 60,
+        visible: showHeat,
+
        
+    updateTriggers: {
+      visible: {showHeat}
+    },
     })
 
 const myHexagonLayer = new HexagonLayer({
@@ -47,6 +57,8 @@ const myHexagonLayer = new HexagonLayer({
       opacity: 0.6,        
       coverage: 0.88,
       lowerPercentile: 50,
+      visible: showHex
+
   })
 
 const myScatterplotLayer = new ScatterplotLayer({
@@ -59,6 +71,8 @@ const myScatterplotLayer = new ScatterplotLayer({
     getPosition: d => [d.longitude, d.latitude],
     getFillColor: d => d.n_connected > 0 ? [200, 0, 40, 150] : [255, 140, 0, 100],
     pickable: true,
+    visible: showScatter
+
     // onHover: ({object, x, y}) => {
     //     const el = document.getElementById('tooltip');
     //     if (object) {
@@ -96,24 +110,34 @@ class App extends React.Component {
   
 
   //function to turn the hex layer on and off
-  toggleHex(){
+ toggleHex(){
     //if the hexagon layer is active
   if (this.state.layers.includes(myHexagonLayer)){
   //remove the hex layer from the array
-  this.state.layers.splice(this.state.layers.indexOf(myHexagonLayer),1);
-  }else{ //if the hex layer is not active
+
+  layers.splice(this.state.layers.indexOf(myHexagonLayer),1);
+  showHeat = false;
+  console.log(layers);
+ }else{ //if the hex layer is not active
     //add the hex layer to the array of layers
     this.state.layers.push(myHexagonLayer);
+ }
   }
-    this.setState({layers:layers}, () => {
-      console.log('State updated')
-    });
-    // StaticMap.setLayoutProperty('HeatmapLayer', 'visibility', 'none');
+
+  toggleHeat(){
+    //if the Heatmap layer is active
+  if (this.state.layers.includes(myHeatmapLayer)){
+  //remove the Heat layer from the array
+  layers.splice(this.state.layers.indexOf(myHeatmapLayer),1);
+  console.log(layers);
+ }else{ //if the Heat layer is not active
+    //add the Heat layer to the array of layers
+    this.state.layers.push(myHeatmapLayer);
+ }
   }
   
 
-  render() {
-    
+  render() {    
  
     return (
       <Router>
@@ -122,7 +146,7 @@ class App extends React.Component {
         initialViewState={initialViewState}
         controller={true}
         // layers={layers}
-        layers={this.state.layers}
+        layers={layers}
       >
         <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
         
@@ -137,6 +161,9 @@ class App extends React.Component {
          <div>Time</div>
            <div class="row">
 
+               {/* <div class="col">
+                   <input type="date" class="date form-control" id="myDate" />
+               </div> */}
                <div class="col">
 
                    <input type="time" class="time form-control" min="08:00:00" max="23:59:00" />
@@ -153,19 +180,14 @@ class App extends React.Component {
       />
 
                <button type="button" onClick={() => this.toggleHex()} id="toggleHex" class="btn btn-secondary">Toggle Hex Layer</button>
-               <button type="button" id="toggleHeat" class="btn btn-secondary">Toggle Heatmap Layer</button>
-               
-           
-
-
-       </div>
+               <button type="button" onClick={() => this.toggleHeat()} id="toggleHeat" class="btn btn-secondary">Toggle Heatmap Layer</button>
+ </div>
     </div>
 
         
       </div>
         <Footer />
-      
-      
+
 
       </Router>
     );
@@ -174,6 +196,7 @@ class App extends React.Component {
   }
   
 }
+
 
 
 export default App;
