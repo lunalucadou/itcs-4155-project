@@ -421,6 +421,10 @@ export default function CustomSlider() {
     setValue(valueString);
   };
 
+  const sendTime = () => {
+      this.props.parentCallback(value);
+  }
+
 
   return (
     <div className={classes.root}>
@@ -436,6 +440,7 @@ export default function CustomSlider() {
              max = {23.5}
              onChange = {handleSliderChange}
           />
+          {sendTime}
     </div>
   );
 }
