@@ -24,11 +24,10 @@ io.on('connection', () =>{
 })
 
 
+
 // Middleware
 app.use(cors());
 app.use(express.json()); // Allows server to parse JSON
-
-
 
 
 
