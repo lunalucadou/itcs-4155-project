@@ -406,15 +406,12 @@ export default function CustomSlider() {
   const handleSliderChange = (event, newValue) => {
       var valueString;
     if(newValue < 10 && (newValue - Math.floor(newValue)=== 0)){  // 8 and 9
-       console.log('whole number');
        valueString =  '0' + newValue.toString() + ':00:00';
     }
     else if(newValue - Math.floor(newValue)=== 0){
-        console.log('whole number');
         valueString = newValue.toString() +':00:00'
     }
     else if(newValue < 10){
-        console.log('testing');
         valueString = '0' + newValue.toString() + '0:00';
     }
     else{
@@ -427,7 +424,7 @@ export default function CustomSlider() {
 
   return (
     <div className={classes.root}>
-        the value of time is {value}
+        {value}
           <Slider
              defaultValue={8}
              // getAriaValueText={valuetext}
@@ -437,7 +434,7 @@ export default function CustomSlider() {
              step = {null}
              min ={8}
              max = {23.5}
-            onChange = {handleSliderChange}
+             onChange = {handleSliderChange}
           />
     </div>
   );

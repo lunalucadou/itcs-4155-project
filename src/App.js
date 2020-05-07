@@ -107,9 +107,6 @@ class App extends React.Component {
       time: 8
     });
   }
-    
-  
-
   //function to turn the hex layer on and off
  toggleHex(){
     //if the hexagon layer is active
@@ -157,28 +154,10 @@ class App extends React.Component {
         
         <Nav />
         <div id="sideBar">
-       <div class="form">
-         <div>this is the value of time: {this.state.time} </div>
-         <div>Time</div>
-           <div class="row">
-
-               {/* <div class="col">
-                   <input type="date" class="date form-control" id="myDate" />
-               </div> */}
-               <div class="col">
-
-                   <input type="time" class="time form-control" min="08:00:00" max="23:59:00" />
-               </div>
-
-
-           </div>
-           
-
            <Typography id="discrete-slider" gutterBottom>
              Time Slider
       </Typography>
-      <CustomSlider
-      />
+      <CustomSlider/>
 
                <button type="button" onClick={() => this.toggleHex()} id="toggleHex" class="btn btn-secondary">Toggle Hex Layer</button>
                <button type="button" onClick={() => this.toggleHeat()} id="toggleHeat" class="btn btn-secondary">Toggle Heatmap Layer</button>
@@ -186,7 +165,6 @@ class App extends React.Component {
     </div>
 
         
-      </div>
         <Footer />
 
 
