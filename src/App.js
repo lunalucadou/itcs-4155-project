@@ -4,10 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "./styles.css"
 // import Map from "./components/map.component.js"
 import Nav from "./components/nav.component.js"
-import SideBar from "./components/sidebar.component.js"
 import Footer from "./components/footer.component.js"
 import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+import CustomSlider from './components/customSlider'
 
 // import { GoogleMap, withScriptjs, withGoogleMap} from "react-google-maps"
 // import { GoogleMapsOverlay } from '@deck.gl/google-maps';
@@ -18,6 +17,7 @@ import DeckGL from '@deck.gl/react';
 import {StaticMap} from 'react-map-gl';
 const demoData = require('./demodata.json');
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicmphbmlrMSIsImEiOiJjazh3ZXgwcHMwanltM3RzZm1kYTJwbjk1In0.kERuiTj_jF-CSG6lqkGeNQ';
+
 
 var layers = [];
 var initialViewState = {
@@ -84,7 +84,16 @@ class App extends React.Component {
     this.toggleHex = this.toggleHex.bind(this);
     layers.push(myHeatmapLayer, myHexagonLayer, myScatterplotLayer);
     this.state = {layers: layers};
+    this.state = {time: 0};
   }
+
+  componentDidMount(){
+    this.setState({
+      time: 8
+    });
+  }
+    
+  
 
   //function to turn the hex layer on and off
   toggleHex(){
@@ -101,6 +110,7 @@ class App extends React.Component {
     });
     // StaticMap.setLayoutProperty('HeatmapLayer', 'visibility', 'none');
   }
+  
 
   render() {
     
@@ -123,14 +133,13 @@ class App extends React.Component {
         <Nav />
         <div id="sideBar">
        <div class="form">
+         <div>this is the value of time: {this.state.time} </div>
+         <div>Time</div>
            <div class="row">
 
                <div class="col">
-                   <input type="date" class="date form-control" id="myDate" />
-               </div>
-               <div class="col">
 
-                   <input type="time" class="time form-control" min="00:00:00" max="01:30:00" />
+                   <input type="time" class="time form-control" min="08:00:00" max="23:59:00" />
                </div>
 
 
@@ -138,17 +147,9 @@ class App extends React.Component {
            
 
            <Typography id="discrete-slider" gutterBottom>
-        Time
+             Time Slider
       </Typography>
-      <Slider
-        defaultValue={480}
-        // getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        step={5}
-        marks
-        min={0}
-        max={960}
+      <CustomSlider
       />
 
                <button type="button" onClick={() => this.toggleHex()} id="toggleHex" class="btn btn-secondary">Toggle Hex Layer</button>
