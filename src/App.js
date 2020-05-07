@@ -37,7 +37,7 @@ const myHeatmapLayer = new HeatmapLayer({
         id: 'heat',
         data: demoData,
         getPosition: d => [d.longitude, d.latitude],
-        getWeight: d => d.n_connected * 0.4,
+        getWeight: d => d.connections * 0.4,
         radiusPixels: 60,
         visible: showHeat,
 
@@ -51,7 +51,7 @@ const myHexagonLayer = new HexagonLayer({
       id: 'hex',
       data: demoData,
       getPosition: d => [d.longitude, d.latitude],
-      getElevationWeight: d => d.n_connected,
+      getElevationWeight: d => d.connections,
       extruded: true,
       radius: 20,         
       opacity: 0.6,        
@@ -69,7 +69,7 @@ const myScatterplotLayer = new ScatterplotLayer({
     radiusMinPixels: 20,
     radiusMaxPixels: 20,
     getPosition: d => [d.longitude, d.latitude],
-    getFillColor: d => d.n_connected > 0 ? [200, 0, 40, 150] : [255, 140, 0, 100],
+    getFillColor: d => d.connections > 0 ? [200, 0, 40, 150] : [255, 140, 0, 100],
     pickable: true,
     visible: showScatter
 
@@ -97,9 +97,8 @@ class App extends React.Component {
     super(props);
     this.toggleHex = this.toggleHex.bind(this);
     layers.push(myHeatmapLayer, myHexagonLayer, myScatterplotLayer);
-    this.state = {layers: layers,
-      time: 0
-    };
+    this.state = {layers: layers, time: 0};
+    // this.state = {time: 0};
   }
 
   componentDidMount(){
@@ -112,14 +111,24 @@ class App extends React.Component {
     //if the hexagon layer is active
   if (this.state.layers.includes(myHexagonLayer)){
   //remove the hex layer from the array
+  console.log('foobar');
+  console.log(this.state.layers);
+  layers = layers.splice(layers.indexOf(myHexagonLayer),1);
+  // layers = layers.filter(id => id == "")
 
-  layers.splice(this.state.layers.indexOf(myHexagonLayer),1);
-  showHeat = false;
   console.log(layers);
+
+// layers = [myHeatmapLayer,myScatterplotLayer];
+
+// Use updating the layers variable instead of slicing the state to update instantly. QUESTION: can it go back to the way it was after initial toggle?
+
  }else{ //if the hex layer is not active
     //add the hex layer to the array of layers
     this.state.layers.push(myHexagonLayer);
  }
+
+ this.setState({layers:layers});
+
   }
 
   toggleHeat(){
@@ -132,6 +141,7 @@ class App extends React.Component {
     //add the Heat layer to the array of layers
     this.state.layers.push(myHeatmapLayer);
  }
+ this.setState({layers:layers});
   }
   
 
@@ -154,6 +164,22 @@ class App extends React.Component {
         
         <Nav />
         <div id="sideBar">
+<<<<<<< HEAD
+=======
+       <div class="form">
+         <div>this is the value of time: {this.state.time} </div>
+         <div>Time</div>
+           <div class="row">
+
+               {/* <div class="col">
+                   <input type="date" class="date form-control" id="myDate" />
+               </div> */}
+
+
+           </div>
+           
+
+>>>>>>> c27f1cea687e50bbe5ba30c429deffeba1d469f2
            <Typography id="discrete-slider" gutterBottom>
              Time Slider
       </Typography>
