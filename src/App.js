@@ -532,6 +532,36 @@ new HexagonLayer({
   lowerPercentile: 50,
   visible: showHex
 
+}),
+
+new ScatterplotLayer({
+  id: 'scatter',
+  data: this.state.data,
+  opacity: 0.8,
+  filled: true,
+  radiusMinPixels: 20,
+  radiusMaxPixels: 20,
+  getPosition: d => [d.longitude, d.latitude],
+  getFillColor: d => d.connections > 0 ? [200, 0, 40, 150] : [255, 140, 0, 100],
+  pickable: true,
+
+
+  onHover: ({object, x, y}) => {
+      const el = document.getElementById('tooltip');
+      if (object) {
+        el.innerHTML = `<h1>${object.building}</h1> <br> <h1>${object.connections} Users connected </h1>`
+        el.style.display = 'block';
+        el.style.opacity = 0.9;
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+      } else {
+        el.style.opacity = 0.0;
+      }
+  },
+
+  onClick: ({object, x, y}) => {
+    //Do something
+  },
 })
 
 ]
