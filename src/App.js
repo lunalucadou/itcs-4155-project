@@ -7,7 +7,6 @@ import "./styles.css"
 import Nav from "./components/nav.component.js"
 import Footer from "./components/footer.component.js"
 import Typography from '@material-ui/core/Typography';
-import CustomSlider from './components/customSlider'
 import Slider from '@material-ui/core/Slider'
 
 // import { GoogleMap, withScriptjs, withGoogleMap} from "react-google-maps"
@@ -450,6 +449,8 @@ const myHexagonLayer = new HexagonLayer({
 
   ]
 
+ 
+
 const myScatterplotLayer = new ScatterplotLayer({
     id: 'scatter',
     data: demoData,
@@ -485,7 +486,7 @@ class App extends React.Component {
     super(props);
     this.toggleHex = this.toggleHex.bind(this);
     layers.push(myHeatmapLayer, myHexagonLayer, myScatterplotLayer);
-    this.state = {layers: layers, time: "0"};
+    this.state = {layers: layers, time: "0", data: demoData};
   }
 
   componentDidMount(){
@@ -510,19 +511,15 @@ class App extends React.Component {
   }
   valueString = valueString.replace('.',':');
   this.setState({
-    time: valueString
-  })
+    time: valueString,
+    data: demoData.filter(obj => {
+      return obj.timestamp === this.state.time
+    })
+    });
+  console.log(this.state.data)
 };
 
-  /*handleTime = (timeValue) =>{
-    this.setState({
-      time: timeValue
-      
-    });
-    // eslint-disable-next-line no-undef
-    console.log('time is:' + time);
-  }
-  */
+
   //function to turn the hex layer on and off
  toggleHex(){
     //if the hexagon layer is active
@@ -588,12 +585,12 @@ class App extends React.Component {
              defaultValue={8}
              // getAriaValueText={valuetext}
              aria-labelledby="discrete-slider"
-             valueLabelDisplay="Auto"
+             valueLabelDisplay="auto"
              marks = {marks}
              step = {null}
              min ={8}
              max = {23.5}
-             onChange = {this.handleSliderChange}
+             onChangeCommitted = {this.handleSliderChange}
           />
 
                <button type="button" onClick={() => this.toggleHex()} id="toggleHex" class="btn btn-secondary">Toggle Hex Layer</button>
