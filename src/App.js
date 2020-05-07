@@ -16,7 +16,7 @@ import { ScatterplotLayer } from '@deck.gl/layers';
 import { HeatmapLayer } from '@deck.gl/aggregation-layers';
 import DeckGL from '@deck.gl/react';
 import {StaticMap} from 'react-map-gl';
-const demoData = require('./demodata.json');
+var demoData = require('./demodata.json');
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicmphbmlrMSIsImEiOiJjazh3ZXgwcHMwanltM3RzZm1kYTJwbjk1In0.kERuiTj_jF-CSG6lqkGeNQ';
 
 
@@ -33,21 +33,15 @@ var initialViewState = {
   bearing: 0
 };
 
-const myHeatmapLayer = new HeatmapLayer({
+var myHeatmapLayer = new HeatmapLayer({
         id: 'heat',
         data: demoData,
         getPosition: d => [d.longitude, d.latitude],
         getWeight: d => d.connections * 0.4,
         radiusPixels: 60,
-        visible: showHeat,
-
-       
-    updateTriggers: {
-      visible: {showHeat}
-    },
     })
 
-const myHexagonLayer = new HexagonLayer({
+var myHexagonLayer = new HexagonLayer({
       id: 'hex',
       data: demoData,
       getPosition: d => [d.longitude, d.latitude],
@@ -451,7 +445,7 @@ const myHexagonLayer = new HexagonLayer({
 
  
 
-const myScatterplotLayer = new ScatterplotLayer({
+var myScatterplotLayer = new ScatterplotLayer({
     id: 'scatter',
     data: demoData,
     opacity: 0.8,
@@ -517,6 +511,34 @@ class App extends React.Component {
     })
     });
   console.log(this.state.data)
+
+  layers = [new HeatmapLayer({
+    id: 'heat',
+    data: this.state.data,
+    getPosition: d => [d.longitude, d.latitude],
+    getWeight: d => d.connections * 0.4,
+    radiusPixels: 60,
+}),
+
+new HexagonLayer({
+  id: 'hex',
+  data: this.state.data,
+  getPosition: d => [d.longitude, d.latitude],
+  getElevationWeight: d => d.connections,
+  extruded: true,
+  radius: 20,         
+  opacity: 0.6,        
+  coverage: 0.88,
+  lowerPercentile: 50,
+  visible: showHex
+
+})
+
+]
+
+this.setState({layers:layers});
+
+  
 };
 
 
