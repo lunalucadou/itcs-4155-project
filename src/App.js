@@ -97,8 +97,9 @@ class App extends React.Component {
     super(props);
     this.toggleHex = this.toggleHex.bind(this);
     layers.push(myHeatmapLayer, myHexagonLayer, myScatterplotLayer);
-    this.state = {layers: layers};
-    this.state = {time: 0};
+    this.state = {layers: layers,
+      time: 0
+    };
   }
 
   componentDidMount(){
