@@ -164,22 +164,6 @@ class App extends React.Component {
         
         <Nav />
         <div id="sideBar">
-<<<<<<< HEAD
-=======
-       <div class="form">
-         <div>this is the value of time: {this.state.time} </div>
-         <div>Time</div>
-           <div class="row">
-
-               {/* <div class="col">
-                   <input type="date" class="date form-control" id="myDate" />
-               </div> */}
-
-
-           </div>
-           
-
->>>>>>> c27f1cea687e50bbe5ba30c429deffeba1d469f2
            <Typography id="discrete-slider" gutterBottom>
              Time Slider
       </Typography>
